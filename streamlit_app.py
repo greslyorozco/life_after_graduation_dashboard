@@ -4,7 +4,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 st.title("Life After Graduation")
 
 st.subheader("Student Debt, and After College Outcomes")
@@ -24,16 +23,13 @@ public versus private schools.
 
 st.markdown('---')
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 with col1:
     st.metric("Main Topic", "Student Debt")
 
 with col2:
     st.metric("Outcome Focus", "Salary + Jobs")
-
-with col3:
-    st.metric("Dashboard Tool", "Streamlit")
 
 st.markdown('---')
 
@@ -49,3 +45,4 @@ st.write("""
 7. Main insights  
 8. Team contributions and conclusion  
 """)
+
