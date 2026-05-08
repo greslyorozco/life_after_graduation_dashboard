@@ -16,8 +16,8 @@ school_colors = ["gold", "lightpink", "steelblue"]
 st.sidebar.title("Life After Graduation")
 st.sidebar.write("Student Debt + Post College Outcomes")
 
-if os.path.exists("Images/graduation.png"):
-    st.sidebar.image("Images/graduation.png", width=150)
+if os.path.exists("graduation.png"):
+    st.sidebar.image("graduation.png", width=150)
 
 st.sidebar.subheader("Team")
 st.sidebar.write("Gresly Orozco")
@@ -108,10 +108,10 @@ with col_title:
     """)
 
 with col_image:
-    if os.path.exists("Images/college.png"):
-        st.image("Images/college.png", width=330)
-    elif os.path.exists("Images/graduation.png"):
-        st.image("Images/graduation.png", width=330)
+    if os.path.exists("college.png"):
+        st.image("college.png", width=330)
+    elif os.path.exists("graduation.png"):
+        st.image("graduation.png", width=330)
 
 st.markdown("---")
 
@@ -153,20 +153,20 @@ with tab1:
     col_a, col_b, col_c = st.columns(3)
 
     with col_a:
-        if os.path.exists("Images/debt.png"):
-            st.image("Images/debt.png", width=110)
+        if os.path.exists("debt.png"):
+            st.image("debt.png", width=110)
         st.subheader("Debt")
         st.write("This is the money students may owe after college.")
 
     with col_b:
-        if os.path.exists("Images/salary.png"):
-            st.image("Images/salary.png", width=110)
+        if os.path.exists("salary.png"):
+            st.image("salary.png", width=110)
         st.subheader("Salary")
         st.write("This shows how much graduates may earn after college.")
 
     with col_c:
-        if os.path.exists("Images/career.png"):
-            st.image("Images/career.png", width=110)
+        if os.path.exists("career.png"):
+            st.image("career.png", width=110)
         st.subheader("Jobs")
         st.write("This helps us understand whether graduates are finding work.")
 
@@ -408,21 +408,21 @@ with tab6:
     img1, img2, img3, img4, img5 = st.columns(5)
 
     with img1:
-        if os.path.exists("Images/graduation.png"):
-            st.image("Images/graduation.png", width=120)
+        if os.path.exists("graduation.png"):
+            st.image("graduation.png", width=120)
 
     with img2:
-        if os.path.exists("Images/debt.png"):
-            st.image("Images/debt.png", width=120)
+        if os.path.exists("debt.png"):
+            st.image("debt.png", width=120)
 
     with img3:
-        if os.path.exists("Images/salary.png"):
-            st.image("Images/salary.png", width=120)
+        if os.path.exists("salary.png"):
+            st.image("salary.png", width=120)
 
     with img4:
-        if os.path.exists("Images/career.png"):
-            st.image("Images/career.png", width=120)
+        if os.path.exists("career.png"):
+            st.image("career.png", width=120)
 
     with img5:
-        if os.path.exists("Images/college.png"):
-            st.image("Images/college.png", width=120)
+        if os.path.exists("college.png"):
+            st.image("college.png", width=120)
