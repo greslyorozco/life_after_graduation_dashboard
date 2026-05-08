@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import plotly.express as px
 import os
 import zipfile
 
@@ -15,7 +15,6 @@ school_colors = ["gold", "lightpink", "steelblue"]
 
 st.sidebar.title("Life After Graduation")
 st.sidebar.write("Student Debt + Post College Outcomes")
-st.sidebar.markdown("---")
 
 if os.path.exists("Images/graduation.png"):
     st.sidebar.image("Images/graduation.png", width=150)
@@ -147,7 +146,7 @@ with tab1:
     st.header("Overview")
 
     st.write("""
-    Our project asks a simple question: after students borrow money for college,
+    After students borrow money for college,
     what happens next?
     """)
 
@@ -406,10 +405,6 @@ with tab6:
     They should also ask, "What opportunities might this choice create after graduation?"
     """)
 
-    st.markdown("---")
-
-    st.subheader("Life After Graduation in One View")
-
     img1, img2, img3, img4, img5 = st.columns(5)
 
     with img1:
@@ -431,4 +426,3 @@ with tab6:
     with img5:
         if os.path.exists("Images/college.png"):
             st.image("Images/college.png", width=120)
-
