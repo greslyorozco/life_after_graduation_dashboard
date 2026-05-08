@@ -21,7 +21,7 @@ def read_scorecard_zip():
                     return pd.read_csv(csv_file, low_memory=False)
 
 st.sidebar.title("Life After Graduation")
-st.sidebar.write("Student Debt and Post College Outcomes")
+st.sidebar.write("Student Debt + Post College Outcomes")
 
 if os.path.exists("Images/graduation.png"):
     st.sidebar.image("Images/graduation.png", width=150)
@@ -70,7 +70,6 @@ scorecard_df = scorecard_df.dropna(subset=["School Type"])
 
 majors_df["Median"] = pd.to_numeric(majors_df["Median"], errors="coerce")
 majors_df["Unemployment_rate"] = pd.to_numeric(majors_df["Unemployment_rate"], errors="coerce")
-majors_df["Total"] = pd.to_numeric(majors_df["Total"], errors="coerce")
 majors_df = majors_df.dropna(subset=["Median", "Unemployment_rate"])
 
 st.sidebar.markdown("---")
@@ -84,29 +83,16 @@ selected_school_types = st.sidebar.multiselect(
     default=school_options
 )
 
-state_options = sorted(scorecard_df["STABBR"].dropna().unique())
+scorecard_filtered = scorecard_df.loc[
+    scorecard_df["School Type"].isin(selected_school_types)
+]
 
-selected_states = st.sidebar.multiselect(
-    "State",
-    state_options,
-    default=[]
-)
-
-major_categories = sorted(majors_df["Major_category"].dropna().unique())
+major_categories = majors_df["Major_category"].dropna().unique()
 
 selected_major_category = st.sidebar.selectbox(
     "Major category",
     major_categories
 )
-
-scorecard_filtered = scorecard_df.loc[
-    scorecard_df["School Type"].isin(selected_school_types)
-]
-
-if selected_states:
-    scorecard_filtered = scorecard_filtered.loc[
-        scorecard_filtered["STABBR"].isin(selected_states)
-    ]
 
 majors_filtered = majors_df.loc[
     majors_df["Major_category"] == selected_major_category
@@ -120,12 +106,11 @@ with col_title:
 
     st.write("""
     College can open doors, but it can also leave students with debt.
-    This dashboard looks at both sides of that story.
+    This dashboard looks at both sides: what students owe and what they may gain after graduation.
     """)
 
-    st.info("""
-    Simple idea: we compare what students may owe with what they may earn,
-    where they study, what they major in, and how likely they are to find work.
+    st.write("""
+    We compare student debt with salary, unemployment, school type, major choice, and location.
     """)
 
 with col_image:
@@ -136,13 +121,15 @@ with col_image:
 
 st.markdown("---")
 
-metric1, metric2, metric3, metric4 = st.columns(4)
+metric1, metric2 = st.columns(2)
 
 with metric1:
-    st.metric("Schools in View", scorecard_filtered["INSTNM"].nunique())
+    st.metric("Schools in the Data", scorecard_filtered["INSTNM"].nunique())
 
 with metric2:
-    st.metric("States in View", scorecard_filtered["STABBR"].nunique())
+    st.metric("States in the Data", scorecard_filtered["STABBR"].nunique())
+
+metric3, metric4 = st.columns(2)
 
 with metric3:
     st.metric("Median Student Debt", "$" + str(round(scorecard_filtered["DEBT_MDN"].median(), 0)))
@@ -165,57 +152,50 @@ with tab1:
     st.header("Overview")
 
     st.write("""
-    Our project asks one main question:
-    after students borrow money for college, what happens next?
+    After students borrow money for college,
+    what happens next?
     """)
 
     col_a, col_b, col_c = st.columns(3)
 
     with col_a:
         if os.path.exists("Images/debt.png"):
-            st.image("Images/debt.png", width=120)
+            st.image("Images/debt.png", width=110)
         st.subheader("Debt")
         st.write("This is the money students may owe after college.")
 
     with col_b:
         if os.path.exists("Images/salary.png"):
-            st.image("Images/salary.png", width=120)
+            st.image("Images/salary.png", width=110)
         st.subheader("Salary")
         st.write("This shows how much graduates may earn after college.")
 
     with col_c:
         if os.path.exists("Images/career.png"):
-            st.image("Images/career.png", width=120)
+            st.image("Images/career.png", width=110)
         st.subheader("Jobs")
-        st.write("This shows whether graduates are finding work.")
+        st.write("This helps us understand whether graduates are finding work.")
 
     st.markdown("---")
 
-    st.success("""
-    The story is not only about price. A school or major can cost more,
-    but we also need to ask what students may get after graduation.
+    st.write("""
+    We do not want to look at debt by itself. Debt only makes sense when we also look at
+    salary, jobs, school type, major choice, and state.
     """)
-
-    with st.expander("Click to see our motivation"):
-        st.write("""
-        We chose this topic because student debt affects many college students.
-        Tuition is expensive, and borrowing money can shape a person's future.
-        Since we are students too, this topic feels personal and important.
-        """)
 
     with st.expander("Click to see our project questions"):
         st.write("""
-        1. Is student debt rising over time?
-        2. How does debt vary by state?
-        3. What is the link between debt and income?
-        4. Does more debt lead to more pay?
-        5. How does debt connect to job outcomes?
-        6. How does location change the story?
-        7. Which school type seems to pay off better?
+        1. Is student debt rising over time?  
+        2. How does debt vary by state?  
+        3. What is the link between debt and income?  
+        4. Does more debt lead to more pay?  
+        5. How does debt connect to job outcomes?  
+        6. How does cost of living change the story?  
+        7. Which school type seems to pay off better?  
         """)
 
 with tab2:
-    st.header("Major Outcomes")
+    st.header("Outcomes by Major")
 
     st.write("Use the sidebar to choose a major group.")
 
@@ -245,8 +225,8 @@ with tab2:
 
         with st.expander("Click to interpret the salary chart"):
             st.write("""
-            This chart shows the majors in this group that usually earn the most money.
-            Higher bars mean higher typical pay after graduation.
+            This chart shows which majors in the selected group have the highest typical salary.
+            It helps us see which fields may lead to stronger earnings after graduation.
             """)
 
     with col_right:
@@ -271,44 +251,12 @@ with tab2:
 
         with st.expander("Click to interpret the unemployment chart"):
             st.write("""
-            This chart checks job risk for the same majors.
-            A major can pay well, but students also want to know if people in that major are finding jobs.
+            This chart looks at job risk. A major can have a strong salary, but if unemployment is higher,
+            students may still face uncertainty after graduation.
             """)
 
-    st.markdown("---")
-
-    st.subheader("Salary Compared With Unemployment")
-
-    fig = px.scatter(
-        majors_filtered,
-        x="Unemployment_rate",
-        y="Median",
-        size="Total",
-        color="Major",
-        hover_name="Major",
-        title="Salary and Job Risk by Major",
-        template="plotly_white"
-    )
-
-    fig.update_layout(
-        title_font_size=22,
-        xaxis_title="Unemployment Rate",
-        yaxis_title="Median Salary",
-        showlegend=False
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
-
-    with st.expander("Click to interpret the major scatter plot"):
-        st.write("""
-        Each bubble is a major.
-        Higher bubbles mean more pay.
-        Bubbles farther left mean less unemployment.
-        The strongest majors are usually high on the chart and closer to the left side.
-        """)
-
 with tab3:
-    st.header("Student Debt")
+    st.header("Student Debt by School Type")
 
     debt_summary = scorecard_filtered.groupby("School Type")["DEBT_MDN"].median()
 
@@ -335,9 +283,8 @@ with tab3:
 
     with st.expander("Click to interpret this box plot"):
         st.write("""
-        This chart compares debt across public, private nonprofit, and private for profit schools.
-        The line inside each box is the middle debt value.
-        The dots show schools with much higher or much lower debt.
+        This chart compares student debt across public, private nonprofit, and private for profit schools.
+        The line inside each box shows the middle debt value. The dots show schools with much higher or lower debt.
         """)
 
     st.markdown("---")
@@ -370,7 +317,7 @@ with tab3:
     with st.expander("Click to interpret the state chart"):
         st.write("""
         This chart shows where student debt is highest in the data.
-        It helps us see that location can change the college debt story.
+        It helps us compare college debt across different states.
         """)
 
 with tab4:
@@ -385,7 +332,6 @@ with tab4:
             y="MD_EARN_WNE_P10",
             color="School Type",
             hover_name="INSTNM",
-            hover_data=["STABBR"],
             title="Median Student Debt Compared With Median Earnings",
             template="plotly_white",
             color_discrete_sequence=school_colors
@@ -401,46 +347,10 @@ with tab4:
 
         with st.expander("Click to interpret this scatter plot"):
             st.write("""
-            Each dot is one college.
-            Dots on the right have more student debt.
-            Dots near the top have higher earnings.
-            We are looking to see if higher debt also comes with higher pay.
-            If the dots look scattered, then debt alone does not explain earnings.
+            Each dot is a college. Dots farther right have higher student debt.
+            Dots higher up have higher earnings. If debt and earnings rise together,
+            the dots should move upward as they move right. This chart helps us check if that pattern is clear.
             """)
-
-        st.markdown("---")
-
-        st.subheader("Debt and Earnings by School Type")
-
-        school_money = scorecard_filtered.groupby("School Type")[["DEBT_MDN", "MD_EARN_WNE_P10"]].median()
-        school_money = school_money.reset_index()
-
-        fig = px.bar(
-            school_money,
-            x="School Type",
-            y=["DEBT_MDN", "MD_EARN_WNE_P10"],
-            barmode="group",
-            title="Median Debt and Median Earnings by School Type",
-            template="plotly_white",
-            color_discrete_sequence=["orange", "steelblue"]
-        )
-
-        fig.update_layout(
-            title_font_size=22,
-            xaxis_title="School Type",
-            yaxis_title="Dollars",
-            legend_title="Measure"
-        )
-
-        st.plotly_chart(fig, use_container_width=True)
-
-        with st.expander("Click to interpret the grouped bar chart"):
-            st.write("""
-            This chart puts debt and earnings next to each other.
-            It helps us compare what students owe with what graduates may earn.
-            A school type looks stronger when earnings are high compared with debt.
-            """)
-
     else:
         st.write("The earnings column was not found in the dataset.")
 
@@ -458,7 +368,7 @@ with tab5:
     st.subheader("Major Outcomes Dataset Preview")
     st.dataframe(majors_df.head(), width=1200, height=300)
 
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.metric("Scorecard Rows", scorecard_df.shape[0])
@@ -469,85 +379,56 @@ with tab5:
     with col3:
         st.metric("Major Rows", majors_df.shape[0])
 
-    with col4:
-        st.metric("Major Columns", majors_df.shape[1])
-
     with st.expander("Click to see Scorecard columns"):
         st.write(scorecard_df.columns.tolist())
 
-    if "MD_EARN_WNE_P10" in scorecard_df.columns:
-        with st.expander("Click to see missing values in key columns"):
-            st.write(scorecard_df[["INSTNM", "STABBR", "CONTROL", "DEBT_MDN", "MD_EARN_WNE_P10"]].isna().sum())
+    with st.expander("Click to see missing values"):
+        st.write(scorecard_df.isna().sum())
 
     st.subheader("Cleaning Steps")
 
     st.write("""
-    1. Loaded the College Scorecard dataset.
-    2. Loaded the major outcomes dataset.
-    3. Loaded the student loan by state file when available.
-    4. Changed student debt values into numbers.
-    5. Changed earnings values into numbers.
-    6. Removed rows that did not have median debt.
-    7. Created a School Type column from the CONTROL column.
-    8. Used groupby to summarize debt by school type and state.
-    9. Used Plotly charts to make the dashboard interactive.
-    """)
-
-    st.info("""
-    The proposal included cost of living as a future question.
-    The files in this version focus on debt, earnings, school type, major, job outcomes, and state.
-    If a cost of living file is added later, it can be joined by state.
+    1. Loaded the College Scorecard dataset.  
+    2. Loaded the major outcomes dataset.  
+    3. Changed student debt values into numbers.  
+    4. Changed earnings values into numbers when they were available.  
+    5. Removed rows that did not have median debt.  
+    6. Created a School Type column from the CONTROL column.  
+    7. Used groupby to summarize debt by school type and state.  
     """)
 
 with tab6:
     st.header("Conclusion")
 
-    st.success("""
-    The main takeaway is simple:
-    college is not only about how much it costs.
-    Students also need to ask what happens after graduation.
+    st.write("""
+    The big takeaway is that college debt is only one piece of the story.
+    A school or major may cost more, but the real question is what happens after graduation.
+    This dashboard helps compare debt with salary, job outcomes, school type, and location.
     """)
 
     st.write("""
-    A better choice is one where debt, salary, jobs, major, school type, and location make sense together.
-    This dashboard helps compare those pieces side by side.
+    Our final message is simple: students should not only ask, "How much will college cost?"
+    They should also ask, "What opportunities might this choice create after graduation?"
     """)
-
-    st.write("""
-    Our final message:
-    do not only ask, "How much will college cost?"
-    Also ask, "What opportunities might this choice create after graduation?"
-    """)
-
-    st.markdown("---")
-    st.subheader("The Whole Story")
 
     img1, img2, img3, img4, img5 = st.columns(5)
 
     with img1:
         if os.path.exists("Images/graduation.png"):
             st.image("Images/graduation.png", width=120)
-            st.write("Graduation")
 
     with img2:
         if os.path.exists("Images/debt.png"):
             st.image("Images/debt.png", width=120)
-            st.write("Debt")
 
     with img3:
         if os.path.exists("Images/salary.png"):
             st.image("Images/salary.png", width=120)
-            st.write("Salary")
 
     with img4:
         if os.path.exists("Images/career.png"):
             st.image("Images/career.png", width=120)
-            st.write("Jobs")
 
     with img5:
         if os.path.exists("Images/college.png"):
             st.image("Images/college.png", width=120)
-            st.write("College Choice")
-
-
-
