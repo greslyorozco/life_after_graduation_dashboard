@@ -33,18 +33,18 @@ st.sidebar.write("Debt and Earnings")
 st.sidebar.write("Data Cleaning")
 st.sidebar.write("Conclusion")
 
-with zipfile.ZipFile("Data/Most-Recent-Cohorts-Institution 3.csv.zip") as zipped_file:
+with zipfile.ZipFile("Most-Recent-Cohorts-Institution 3.csv.zip") as zipped_file:
     for file_name in zipped_file.namelist():
         if file_name.endswith(".csv") and "__MACOSX" not in file_name:
             with zipped_file.open(file_name) as csv_file:
                 scorecard_df = pd.read_csv(csv_file, low_memory=False)
 
-majors_df = pd.read_csv("Data/sample_recent_grads.csv")
+majors_df = pd.read_csv("sample_recent_grads.csv")
 
 loan_state_df = None
-if os.path.exists("Data/student-loan-by-state.xlsx"):
+if os.path.exists("student-loan-by-state.xlsx"):
     try:
-        loan_state_df = pd.read_excel("Data/student-loan-by-state.xlsx")
+        loan_state_df = pd.read_excel("student-loan-by-state.xlsx")
     except:
         loan_state_df = None
 
