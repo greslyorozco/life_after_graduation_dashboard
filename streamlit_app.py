@@ -1,27 +1,21 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
-import plotly.express as px
 import os
 import zipfile
 
-st.set_page_config(page_title="Life After Graduation Dashboard", layout="wide")
+st.set_page_config(page_title="Life After Graduation", layout="wide")
 
 sns.set_theme(style="whitegrid")
 
 school_colors = ["gold", "lightpink", "steelblue"]
 
-def read_scorecard_zip():
-    with zipfile.ZipFile("Data/Most-Recent-Cohorts-Institution 3.csv.zip") as zipped_file:
-        for file_name in zipped_file.namelist():
-            if file_name.endswith(".csv") and "__MACOSX" not in file_name:
-                with zipped_file.open(file_name) as csv_file:
-                    return pd.read_csv(csv_file, low_memory=False)
-
 st.sidebar.title("Life After Graduation")
 st.sidebar.write("Student Debt + Post College Outcomes")
+st.sidebar.markdown("---")
 
 if os.path.exists("Images/graduation.png"):
     st.sidebar.image("Images/graduation.png", width=150)
@@ -40,7 +34,12 @@ st.sidebar.write("Debt and Earnings")
 st.sidebar.write("Data Cleaning")
 st.sidebar.write("Conclusion")
 
-scorecard_df = read_scorecard_zip()
+with zipfile.ZipFile("Data/Most-Recent-Cohorts-Institution 3.csv.zip") as zipped_file:
+    for file_name in zipped_file.namelist():
+        if file_name.endswith(".csv") and "__MACOSX" not in file_name:
+            with zipped_file.open(file_name) as csv_file:
+                scorecard_df = pd.read_csv(csv_file, low_memory=False)
+
 majors_df = pd.read_csv("Data/sample_recent_grads.csv")
 
 loan_state_df = None
@@ -50,14 +49,10 @@ if os.path.exists("Data/student-loan-by-state.xlsx"):
     except:
         loan_state_df = None
 
-scorecard_df["DEBT_MDN"] = scorecard_df["DEBT_MDN"].replace("PrivacySuppressed", np.nan)
 scorecard_df["DEBT_MDN"] = pd.to_numeric(scorecard_df["DEBT_MDN"], errors="coerce")
 
 if "MD_EARN_WNE_P10" in scorecard_df.columns:
-    scorecard_df["MD_EARN_WNE_P10"] = scorecard_df["MD_EARN_WNE_P10"].replace("PrivacySuppressed", np.nan)
     scorecard_df["MD_EARN_WNE_P10"] = pd.to_numeric(scorecard_df["MD_EARN_WNE_P10"], errors="coerce")
-
-scorecard_df["CONTROL"] = pd.to_numeric(scorecard_df["CONTROL"], errors="coerce")
 
 scorecard_df["School Type"] = scorecard_df["CONTROL"].map({
     1: "Public",
@@ -152,7 +147,7 @@ with tab1:
     st.header("Overview")
 
     st.write("""
-    After students borrow money for college,
+    Our project asks a simple question: after students borrow money for college,
     what happens next?
     """)
 
@@ -411,6 +406,10 @@ with tab6:
     They should also ask, "What opportunities might this choice create after graduation?"
     """)
 
+    st.markdown("---")
+
+    st.subheader("Life After Graduation in One View")
+
     img1, img2, img3, img4, img5 = st.columns(5)
 
     with img1:
@@ -432,3 +431,4 @@ with tab6:
     with img5:
         if os.path.exists("Images/college.png"):
             st.image("Images/college.png", width=120)
+
