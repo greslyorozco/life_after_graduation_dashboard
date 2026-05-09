@@ -133,12 +133,13 @@ with metric4:
 
 st.markdown("---")
 
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "Overview",
     "Major Outcomes",
     "Student Debt",
     "Debt and Earnings",
     "Data Cleaning",
+    "Key Findings",
     "Conclusion"
 ])
 
@@ -390,8 +391,17 @@ with tab5:
     6. Created a School Type column from the CONTROL column.  
     7. Used groupby to summarize debt by school type and state.  
     """)
-
 with tab6:
+    st.header("Key Findings")
+
+    st.success("""
+    - Higher student debt does not always lead to higher salaries.
+    - Major choice strongly impacts earnings after graduation.
+    - Geographic location may influence debt levels and career outcomes.
+    - Public schools generally showed lower median debt compared to some private institutions.
+    - Salary and employmnet outcomes should both be considered when evaluating college value.
+
+with tab7:
     st.header("Conclusion")
 
     st.write("""
