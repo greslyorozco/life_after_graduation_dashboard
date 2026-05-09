@@ -54,6 +54,21 @@ if "MD_EARN_WNE_P10" in scorecard_df.columns:
     scorecard_df["MD_EARN_WNE_P10"] = pd.to_numeric(scorecard_df["MD_EARN_WNE_P10"], errors="coerce")
 major_categories = majors_df["Major_category"].dropna().unique()
 
+scorecard_df["School Type"] = scorecard_df["CONTROL"].map({
+    1: "Public",
+    2: "Private nonprofit",
+    3: "Private for profit"
+})
+
+scorecard_df = scorecard_df.dropna(subset=["DEBT_MDN"])
+scorecard_df = scorecard_df.dropna(subset=["School Type"])
+
+majors_df["Median"] = pd.to_numeric(majors_df["Median"], errors="coerce")
+majors_df["Unemployment_rate"] = pd.to_numeric(majors_df["Unemployment_rate"], errors="coerce")
+majors_df = majors_df.dropna(subset=["Median", "Unemployment_rate"])
+
+st.sidebar.markdown("---")
+st.sidebar.subheader("Filters")
 selected_major_category = st.sidebar.selectbox(
     "Major category",
     major_categories
@@ -75,21 +90,6 @@ majors_filtered = majors_df.loc[
     (majors_df['Median'] <= salary_range[1])
 ]
 
-scorecard_df["School Type"] = scorecard_df["CONTROL"].map({
-    1: "Public",
-    2: "Private nonprofit",
-    3: "Private for profit"
-})
-
-scorecard_df = scorecard_df.dropna(subset=["DEBT_MDN"])
-scorecard_df = scorecard_df.dropna(subset=["School Type"])
-
-majors_df["Median"] = pd.to_numeric(majors_df["Median"], errors="coerce")
-majors_df["Unemployment_rate"] = pd.to_numeric(majors_df["Unemployment_rate"], errors="coerce")
-majors_df = majors_df.dropna(subset=["Median", "Unemployment_rate"])
-
-st.sidebar.markdown("---")
-st.sidebar.subheader("Filters")
 
 school_options = scorecard_df["School Type"].dropna().unique()
 
