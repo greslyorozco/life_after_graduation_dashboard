@@ -88,7 +88,7 @@ selected_major_category = st.sidebar.selectbox(
     major_categories
 )
 salary_min = int(majors_df['Median'].min())
-salary_max = int(majors.df['Median'].max())
+salary_max = int(majors_df['Median'].max())
 salary_range = st.sidebar.slider(
     "Select Median Salary Range",
     salary_min,
