@@ -414,6 +414,8 @@ with tab6:
     - Public schools generally showed lower median debt compared to some private institutions.
     - Salary and employmnet outcomes should both be considered when evaluating college value.
     ''')
+    st.info('Engineering and health majors tend to have higher major salaries but also involve higher debt.')
+    st.warning('Higher student debt does not always lead to higher salaries.')
 
 with tab7:
     st.header("Conclusion")
