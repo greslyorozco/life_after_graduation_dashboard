@@ -103,6 +103,23 @@ scorecard_filtered = scorecard_df.loc[
     scorecard_df["School Type"].isin(selected_school_types)
 ]
 
+school_names = sorted(scorecard_df['INSTNM'].dropna().uique())
+selected_school = st.sidebard.selectbox(
+    'Search for a school",
+    school_names
+)
+school_data = scorecard_df[
+    scorecard_df['INSTNM'] == selected_school
+]
+st.subheader(selected_school)
+st.dataframe(
+    school_data[[
+        "STABBR",
+        "School Type",
+        "Debt_MDN",
+        "MD_EARN_WNE_P10"
+    ]]
+)
 
 col_title, col_image = st.columns([2, 1])
 
