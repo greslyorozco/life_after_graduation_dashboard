@@ -52,6 +52,28 @@ scorecard_df["DEBT_MDN"] = pd.to_numeric(scorecard_df["DEBT_MDN"], errors="coerc
 
 if "MD_EARN_WNE_P10" in scorecard_df.columns:
     scorecard_df["MD_EARN_WNE_P10"] = pd.to_numeric(scorecard_df["MD_EARN_WNE_P10"], errors="coerce")
+major_categories = majors_df["Major_category"].dropna().unique()
+
+selected_major_category = st.sidebar.selectbox(
+    "Major category",
+    major_categories
+)
+salary_min = int(majors_df['Median'].min())
+salary_max = int(majors_df['Median'].max())
+salary_range = st.sidebar.slider(
+    "Select Median Salary Range",
+    salary_min,
+    salary_max,
+    (salary_min,salary_max)
+)
+majors_filtered = majors_df.loc[
+    majors_df['Major_category'] == selected_major_category
+]
+majors_filtered = majors_df.loc[
+    (majors_df['Major_category'] == selected_major_category) &
+    (majors_df['Median'] >= salary_range[0]) &
+    (majors_df['Median'] <= salary_range[1])
+]
 
 scorecard_df["School Type"] = scorecard_df["CONTROL"].map({
     1: "Public",
@@ -81,28 +103,6 @@ scorecard_filtered = scorecard_df.loc[
     scorecard_df["School Type"].isin(selected_school_types)
 ]
 
-major_categories = majors_df["Major_category"].dropna().unique()
-
-selected_major_category = st.sidebar.selectbox(
-    "Major category",
-    major_categories
-)
-salary_min = int(majors_df['Median'].min())
-salary_max = int(majors_df['Median'].max())
-salary_range = st.sidebar.slider(
-    "Select Median Salary Range",
-    salary_min,
-    salary_max,
-    (salary_min,salary_max)
-)
-majors_filtered = majors_df.loc[
-    majors_df['Major_category'] == selected_major_category
-]
-majors_filtered = majors_df.loc[
-    (majors_df['Major_category'] == selected_major_category) &
-    (majors_df['Median'] >= salary_range[0]) &
-    (majors_df['Median'] <= salary_range[1])
-]
 
 col_title, col_image = st.columns([2, 1])
 
