@@ -103,7 +103,7 @@ scorecard_filtered = scorecard_df.loc[
     scorecard_df["School Type"].isin(selected_school_types)
 ]
 
-school_names = scorecard_df['INSTNM'].dropna().astype(str).uique()
+school_names = scorecard_df['INSTNM'].dropna().astype(str).unique()
 school_names = sorted(school_names)
 selected_school = st.sidebard.selectbox(
     "Search for a school",
