@@ -405,17 +405,19 @@ with tab5:
     """)
 with tab6:
     st.header("Key Findings")
-    st.write("test")
 
     st.success('''
-    - Higher student debt does not always lead to higher salaries.
-    - Major choice strongly impacts earnings after graduation.
-    - Geographic location may influence debt levels and career outcomes.
     - Public schools generally showed lower median debt compared to some private institutions.
-    - Salary and employmnet outcomes should both be considered when evaluating college value.
+    - Salary and employment outcomes should both be considered when evaluating college value.
     ''')
-    st.info('Engineering and health majors tend to have higher major salaries but also involve higher debt.')
-    st.warning('Higher student debt does not always lead to higher salaries.')
+    st.info('''
+    - Engineering and health majors tend to have higher major salaries but also involve higher debt.
+    - Major choice strongly impacts earnings after graduation.
+    ''')
+    st.warning('''
+    - Higher student debt does not always lead to higher salaries.
+    - Geographic location may influence debt levels and career outcomes.
+    ''')
 
 with tab7:
     st.header("Conclusion")
