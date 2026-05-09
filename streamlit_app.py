@@ -31,6 +31,7 @@ st.sidebar.write("Major Outcomes")
 st.sidebar.write("Student Debt")
 st.sidebar.write("Debt and Earnings")
 st.sidebar.write("Data Cleaning")
+st.sidebar.write("Key Findings")
 st.sidebar.write("Conclusion")
 
 with zipfile.ZipFile("Most-Recent-Cohorts-Institution 3.csv.zip") as zipped_file:
