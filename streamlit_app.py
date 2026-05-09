@@ -101,7 +101,7 @@ majors_filtered = majors_df.loc[
 majors_filtered = majors_df.loc[
     (majors_df['Major_category'] == selected_major_category) &
     (majors_df['Median'] >= salary_range[0]) &
-    (majors_df['Median'] <= slary_range[1])
+    (majors_df['Median'] <= salary_range[1])
 ]
 
 col_title, col_image = st.columns([2, 1])
