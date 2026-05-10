@@ -296,7 +296,7 @@ with tab3:
 
     st.markdown("---")
 
-    st.subheader("Top 10 States by Median Student Debt")
+    st.subheader("Top States by Median Student Debt")
 
     state_debt = scorecard_filtered.groupby("STABBR")["DEBT_MDN"].median()
     state_debt = state_debt.sort_values(ascending=False).head(10)
@@ -308,7 +308,7 @@ with tab3:
         y="STABBR",
         color="DEBT_MDN",
         orientation="h",
-        title="Top 10 States by Median Student Debt",
+        title="Top States by Median Student Debt",
         template="plotly_white",
         color_continuous_scale=["lightgreen", "gold", "orange"]
     )
