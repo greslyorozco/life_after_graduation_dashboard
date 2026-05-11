@@ -3,7 +3,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
-import plotly.express as px
+import plotly.express as pxe
 import os
 import zipfile
 
@@ -476,7 +476,7 @@ with tab5:
     st.subheader("Major Outcomes Dataset Preview")
     st.dataframe(majors_df.head(), width=1200, height=300)
 
-  st.subheader("Student Loan by State Dataset Preview")
+    st.subheader("Student Loan by State Dataset Preview")
 
 if loan_state_df is not None:
     st.dataframe(loan_state_df.head(), width=1000, height=300)
