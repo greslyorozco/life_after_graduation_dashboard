@@ -225,18 +225,18 @@ with tab2:
             It helps us see which fields may lead to stronger earnings after graduation.
             """)
 
-        with col_right:
-            fig = px.bar(
-                top_10,
-                x="Unemployment_rate",
-                y="Major",
-                color="Unemployment_rate",
-                orientation="h",
-                title="Unemployment Rate",
-                labels={"Unemployment_rate":"Unemployment Rate", "Major":"Major"},
-                template="plotly_white",
-                color_continuous_scale=["lightblue", "gold", "salmon"]
-            )
+    with col_right:
+         fig = px.bar(
+             top_10,
+             x="Unemployment_rate",
+             y="Major",
+             color="Unemployment_rate",
+             orientation="h",
+             title="Unemployment Rate",
+             labels={"Unemployment_rate":"Unemployment Rate", "Major":"Major"},
+             template="plotly_white",
+             color_continuous_scale=["lightblue", "gold", "salmon"]
+        )
         
         #fig.update_xaxes(tickformat=".0%")
         fig.update_traces(
