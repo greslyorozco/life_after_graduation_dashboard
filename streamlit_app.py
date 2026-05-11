@@ -207,7 +207,7 @@ with tab2:
             title="Top Majors by Median Salary",
             labels={"Median": "Median Salary", "Major":"Major"},
             template="plotly_white",
-            color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
+            color_continuous_scale=["lightpink", "orange", "gold"]
         )
 
         fig.update_layout(
@@ -235,7 +235,12 @@ with tab2:
             title="Unemployment Rate",
             labels={"Unemployment_rate":"Unemployment Rate", "Major":"Major"},
             template="plotly_white",
-            color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
+            color_continuous_scale=["lightblue", "gold", "salmon"]
+        )
+        
+        fig2.update_xaxes(tickformat=".0%")
+        fig2.update_traces(
+            hovertemplate="<b>%{y}</b><br>Unemployment Rate: %{x:.1%}<extra></extra>
         )
 
         fig.update_layout(
@@ -243,9 +248,6 @@ with tab2:
             xaxis_title="Unemployment Rate",
             yaxis_title="Major",
             showlegend=False
-        )
-        fig_unemployment.update_traces(
-        hovertemplate="<b>%{y}</b><br>Unemployment Rate: %{x:.1%}<extra></extra>"
         )
 
         st.plotly_chart(fig, use_container_width=True)
