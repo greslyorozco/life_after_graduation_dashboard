@@ -42,11 +42,6 @@ ax.set_ylabel('Earnings')
 ax.legend(['Raw Earnings', 'Adjusted Earnings'])
 
 st.pyplot(fig)
-``
-
-
-
-
 
 
 st.set_page_config(page_title="Life After Graduation", layout="wide")
