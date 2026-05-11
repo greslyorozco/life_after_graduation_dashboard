@@ -77,11 +77,6 @@ selected_major_category = st.sidebar.selectbox(
 majors_filtered = majors_df.loc[
     majors_df['Major_category'] == selected_major_category
 ]
-majors_filtered = majors_df.loc[
-    (majors_df['Major_category'] == selected_major_category) &
-    (majors_df['Median'] >= salary_range[0]) &
-    (majors_df['Median'] <= salary_range[1])
-]
 
 
 school_options = scorecard_df["School Type"].dropna().unique()
