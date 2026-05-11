@@ -243,22 +243,22 @@ with tab2:
         hovertemplate="<b>%{y}</b><br>Unemployment Rate: %{x:.1%}<extra></extra>"
             )
 
-        fig.update_layout(
-            title_font_size=22,
-            xaxis_title="Unemployment Rate",
-            yaxis_title="Major",
-            showlegend=False
-        )
+    fig.update_layout(
+        title_font_size=22,
+        xaxis_title="Unemployment Rate",
+        yaxis_title="Major",
+        showlegend=False
+    )
 
-        st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
-        with st.expander("Click to interpret the unemployment chart"):
-            st.write("""
-            This chart looks at job risk. A major can have a strong salary, but if unemployment is higher,
-            students may still face uncertainty after graduation.
-            """)
+    with st.expander("Click to interpret the unemployment chart"):
+        st.write("""
+        This chart looks at job risk. A major can have a strong salary, but if unemployment is higher,
+        students may still face uncertainty after graduation.
+        """)
 
-        st.caption("Use the major category filter in the sidebar to change the major outcomes.")
+    st.caption("Use the major category filter in the sidebar to change the major outcomes.")
 
 with tab3:
     st.header("Student Debt")
