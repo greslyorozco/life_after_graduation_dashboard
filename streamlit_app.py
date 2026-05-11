@@ -205,7 +205,7 @@ with tab2:
             color="Median",
             orientation="h",
             title="Top Majors by Median Salary",
-            labels={"Meadian": "Median Salary", "Major":"Major"},
+            labels={"Median": "Median Salary", "Major":"Major"},
             template="plotly_white",
             color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
         )
@@ -233,7 +233,7 @@ with tab2:
             color="Unemployment Rate",
             orientation="h",
             title="Unemployment Rate",
-            labels={"Unemployment_rate":"Unemployment Rate", "Major":"Major"}
+            labels={"Unemployment_rate":"Unemployment Rate", "Major":"Major"},
             template="plotly_white",
             color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
         )
