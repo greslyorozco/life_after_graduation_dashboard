@@ -503,10 +503,10 @@ with col2:
 
 
 with st.expander("Click to see Majors columns"):
-        st.write(majors_df.columns.tolist())
+    st.write(majors_df.columns.tolist())
 
 with st.expander("Click to see missing values"):
-        st.write(majors_df.isna().sum())
+    st.write(majors_df.isna().sum())
 
     st.subheader("Cleaning Steps")
 
