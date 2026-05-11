@@ -235,7 +235,7 @@ with tab2:
              title="Unemployment Rate",
              labels={"Unemployment_rate":"Unemployment Rate", "Major":"Major"},
              template="plotly_white",
-             color_continuous_scale=["lightblue", "lightpink, "lightgreen"]
+             color_continuous_scale=["lightpink", "lightgreen", "lightblue"]
         )
         fig.update_xaxes(tickformat=".0%")
         fig.update_coloraxes(colorbar_tickformat=".0%")
