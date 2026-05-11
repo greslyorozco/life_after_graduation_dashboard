@@ -191,7 +191,8 @@ with tab1:
 with tab2:
     st.header("Outcomes by Major")
 
-    st.write("Use the sidebar to choose a major group.")
+    st.caption("Use the major category filter in the sidebar to change the major outcomes.")
+    #st.write("Use the sidebar to choose a major group.")
 
     top_10 = majors_filtered.sort_values("Median", ascending=False).head(10)
 
@@ -258,7 +259,7 @@ with tab2:
             students may still face uncertainty after graduation.
             """)
 
-    st.caption("Use the major category filter in the sidebar to change the major outcomes.")
+    #st.caption("Use the major category filter in the sidebar to change the major outcomes.")
 
 with tab3:
     st.header("Student Debt")
