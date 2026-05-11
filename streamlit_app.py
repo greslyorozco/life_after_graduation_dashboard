@@ -216,15 +216,6 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
-    
-        fig.update_layout(
-            title_font_size=22,
-            xaxis_title="Median Salary",
-            yaxis_title="Major"
-        )
-
-        st.plotly_chart(fig, use_container_width=True)
-
         with st.expander("Click to interpret the salary chart"):
             st.write("""
             This chart shows which majors in the selected group have the highest typical salary.
