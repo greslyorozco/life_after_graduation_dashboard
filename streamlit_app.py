@@ -490,8 +490,8 @@ with tab5:
     with st.expander("Click to see missing values"):
         st.write(scorecard_df.isna().sum())
 
-        st.subheader("Major Outcomes Dataset Preview")
-        st.dataframe(majors_df.head(), width=1200, height=300)
+    st.subheader("Major Outcomes Dataset Preview")
+    st.dataframe(majors_df.head(), width=1200, height=300)
 
     col1, col2, col3 = st.columns(3)
 
