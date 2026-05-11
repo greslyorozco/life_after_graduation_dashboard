@@ -238,6 +238,7 @@ with tab2:
              color_continuous_scale=["lightblue", "gold", "salmon"]
         )
         fig.update_xaxes(tickformat=".0%")
+        fig.update_coloraxes(colorbar_tickformat=".0%")
 
         fig.update_traces(
             hovertemplate="<b>%{y}</b><br>Unemployment Rate: %{x:.1%}<extra></extra>"
