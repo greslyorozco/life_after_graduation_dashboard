@@ -416,7 +416,7 @@ with tab7:
     st.write("""
     The big takeaway is that student debt should not be evaluated on its own.
     A school or major may lead to higher debt, but the real question is what happens after graduation.
-    Carreer outcomes, salary potential, unemployment rates, school type, and geographic location all influence the long-term value of a college education.
+    Career outcomes, salary potential, unemployment rates, school type, and geographic location all influence the long-term value of a college education.
     """)
 
     st.write("""
