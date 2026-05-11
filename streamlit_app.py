@@ -197,16 +197,25 @@ with tab2:
 
     col_left, col_right = st.columns(2)
 
-    with col_left:
-        fig = px.bar(
-            top_10,
-            x="Median",
-            y="Major",
-            color="Median",
-            orientation="h",
-            title="Top Majors by Median Salary",
-            template="plotly_white",
-            color_continuous_scale=["lightpink", "orange", "gold"]
+    fig = px.bar(
+    top_10,
+    x="Median",
+    y="Major",
+    color="Major",
+    orientation="h",
+    title="Top Majors by Median Salary",
+    template="plotly_white",
+    color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
+)
+
+fig.update_layout(
+    title_font_size=22,
+    xaxis_title="Median Salary",
+    yaxis_title="Major",
+    showlegend=False
+)
+
+st.plotly_chart(fig, use_container_width=True)
         )
         fig.update_layout(
             title_font_size=22,
@@ -223,24 +232,25 @@ with tab2:
             """)
 
     with col_right:
-        fig = px.bar(
-            top_10,
-            x="Unemployment_rate",
-            y="Major",
-            color="Unemployment_rate",
-            orientation="h",
-            title="Unemployment Rate",
-            template="plotly_white",
-            color_continuous_scale=["lightblue", "gold", "salmon"]
-        )
+fig = px.bar(
+    top_10,
+    x="Unemployment_rate",
+    y="Major",
+    color="Major",
+    orientation="h",
+    title="Unemployment Rate",
+    template="plotly_white",
+    color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
+)
 
-        fig.update_layout(
-            title_font_size=22,
-            xaxis_title="Unemployment Rate",
-            yaxis_title="Major"
-        )
+fig.update_layout(
+    title_font_size=22,
+    xaxis_title="Unemployment Rate",
+    yaxis_title="Major",
+    showlegend=False
+)
 
-        st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
 
         with st.expander("Click to interpret the unemployment chart"):
             st.write("""
