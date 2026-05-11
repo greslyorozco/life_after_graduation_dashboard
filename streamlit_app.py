@@ -217,7 +217,7 @@ with tab2:
             yaxis_title="Major",
             showlegend=False
         )
-
+        fig.update_xaxes(tickformat=".0%")
         st.plotly_chart(fig, use_container_width=True)
 
         with st.expander("Click to interpret the salary chart"):
