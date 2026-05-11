@@ -475,8 +475,8 @@ with tab5:
     st.subheader("Major Outcomes Dataset Preview")
     st.dataframe(majors_df.head(), width=1200, height=300)
 
+    col1, col2, col3 = st.columns(3)
 
-    
     with col1:
         st.metric("Scorecard Rows", scorecard_df.shape[0])
 
