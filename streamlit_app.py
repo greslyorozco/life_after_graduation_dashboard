@@ -414,9 +414,9 @@ with tab7:
     st.header("Conclusion")
 
     st.write("""
-    The big takeaway is that college debt is only one piece of the story.
-    A school or major may cost more, but the real question is what happens after graduation.
-    This dashboard helps compare debt with salary, job outcomes, school type, and location.
+    The big takeaway is that student debt should not be evaluated on its own.
+    A school or major may lead to higher debt, but the real question is what happens after graduation.
+    Carreer outcomes, salary potential, unemployment rates, school type, and geographic location all influence the long-term value of a college education.
     """)
 
     st.write("""
@@ -445,3 +445,7 @@ with tab7:
     with img5:
         if os.path.exists("college.png"):
             st.image("college.png", width=120)
+
+    st.caption("""
+    This dashbaord demonstrates how data can help students make more informed financial and educational decisions.
+    """)
