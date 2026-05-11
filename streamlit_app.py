@@ -207,7 +207,7 @@ with tab2:
             title="Top Majors by Median Salary",
             labels={"Median": "Median Salary", "Major":"Major"},
             template="plotly_white",
-            color_continuous_scale=["lightpink", "lightgreen", "lightblue"]
+            color_continuous_scale=["lightpink", "gold", "lightblue"]
         )
 
         fig.update_layout(
@@ -235,7 +235,7 @@ with tab2:
              title="Unemployment Rate",
              labels={"Unemployment_rate":"Unemployment Rate", "Major":"Major"},
              template="plotly_white",
-             color_continuous_scale=["lightpink", "lightgreen", "lightblue"]
+             color_continuous_scale=["lightpink", "gold", "lightblue"]
         )
         fig.update_xaxes(tickformat=".0%")
         fig.update_coloraxes(colorbar_tickformat=".0%")
