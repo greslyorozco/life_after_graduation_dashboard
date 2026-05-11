@@ -258,7 +258,7 @@ with tab2:
             students may still face uncertainty after graduation.
             """)
 
-        st.caption("Use the major category filter in the sidebar to change the major outcomes.")
+    st.caption("Use the major category filter in the sidebar to change the major outcomes.")
 
 with tab3:
     st.header("Student Debt")
