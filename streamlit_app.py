@@ -204,7 +204,7 @@ with tab2:
             y="Major",
             color="Median",
             orientation="h",
-            title="Top 10 Majors by Median Salary",
+            title="Top Majors by Median Salary",
             template="plotly_white",
             color_continuous_scale=["lightpink", "orange", "gold"]
         )
