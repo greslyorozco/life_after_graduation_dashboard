@@ -74,7 +74,6 @@ selected_major_category = st.sidebar.selectbox(
     "Major category",
     major_categories
 )
-)
 majors_filtered = majors_df.loc[
     majors_df['Major_category'] == selected_major_category
 ]
