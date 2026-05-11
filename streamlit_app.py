@@ -350,8 +350,6 @@ with tab4:
 
     if loan_state_df is not None:
         st.markdown("---")
-        st.subheader("Student Loan by State Dataset Preview")
-        st.dataframe(loan_state_df.head(), width=1000, height=300)
 
 with tab5:
     st.header("Data Cleaning and Preprocessing")
@@ -361,6 +359,9 @@ with tab5:
 
     st.subheader("Major Outcomes Dataset Preview")
     st.dataframe(majors_df.head(), width=1200, height=300)
+
+    st.subheader("Student Loan by State Dataset Preview")
+    st.dataframe(loan_state_df.head(), width=1000, height=300)
 
     st.subheader("Student Loan by State Dataset Preview")
     st.dataframe(loan_state_df.head(), width=1000, height=300)
