@@ -7,9 +7,6 @@ import plotly.express as px
 import os
 import zipfile
 
-
-
-
 st.set_page_config(page_title="Life After Graduation", layout="wide")
 
 sns.set_theme(style="whitegrid")
