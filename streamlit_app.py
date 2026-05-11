@@ -230,7 +230,7 @@ with tab2:
             y="Major",
             color="Unemployment_rate",
             orientation="h",
-            title="Unemployment Rate for Those Same Majors",
+            title="Unemployment Rate",
             template="plotly_white",
             color_continuous_scale=["lightblue", "gold", "salmon"]
         )
