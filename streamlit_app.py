@@ -202,9 +202,10 @@ with tab2:
             top_10,
             x="Median",
             y="Major",
-            color="Major",
+            color="Median",
             orientation="h",
             title="Top Majors by Median Salary",
+            labels={"Meadian": "Median Salary", "Major":"Major"},
             template="plotly_white",
             color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
         )
@@ -229,9 +230,10 @@ with tab2:
             top_10,
             x="Unemployment_rate",
             y="Major",
-            color="Major",
+            color="Unemployment Rate",
             orientation="h",
             title="Unemployment Rate",
+            labels={"Unemployment_rate":"Unemployment Rate", "Major":"Major"}
             template="plotly_white",
             color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
         )
@@ -241,6 +243,9 @@ with tab2:
             xaxis_title="Unemployment Rate",
             yaxis_title="Major",
             showlegend=False
+        )
+        fig_unemployment.update_traces(
+        hovertemplate="<b>%{y}</b><br>Unemployment Rate: %{x:.1%}<extra></extra>"
         )
 
         st.plotly_chart(fig, use_container_width=True)
@@ -490,6 +495,10 @@ with tab5:
 
     with st.expander("Click to see missing values"):
         st.write(scorecard_df.isna().sum())
+        
+    st.caption("""
+    The College Scoreboard dataset was significantly larger and required more preprocessing and filtering before analysis.
+    """)
 
     st.subheader("Major Outcomes Dataset Preview")
     st.dataframe(majors_df.head(), width=1200, height=300)
@@ -512,13 +521,14 @@ with tab5:
     st.subheader("Cleaning Steps")
 
     st.write("""
-    1. Loaded the College Scorecard dataset.  
-    2. Loaded the major outcomes dataset.  
-    3. Changed student debt values into numbers.  
-    4. Changed earnings values into numbers when they were available.  
-    5. Removed rows that did not have median debt.  
-    6. Created a School Type column from the CONTROL column.  
-    7. Used groupby to summarize debt by school type and state.  
+    1. Loaded and reviewed the College Scorecard dataset.  
+    2. Loaded and reviewed the major outcomes dataset.  
+    3. Checked datasets for missing or incomplete values.
+    4. Converted debt and earnings columns into numeric data types.
+    5. Removed rows with missing median debt values.
+    6. Created a School Type category using the CONTROL column.
+    7. Grouped and summarized data by state, school type, and major category.
+    8. Prepared cleaned datasets for dashboard visualizations and filtering.
     """)
     
 with tab6:
