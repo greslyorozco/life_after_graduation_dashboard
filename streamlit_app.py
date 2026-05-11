@@ -237,16 +237,16 @@ with tab2:
              template="plotly_white",
              color_continuous_scale=["lightblue", "gold", "salmon"]
         )
-         fig.update_xaxes(tickformat=".0%")
+        fig.update_xaxes(tickformat=".0%")
 
-         fig.update_traces(
-             hovertemplate="<b>%{y}</b><br>Unemployment Rate: %{x:.1%}<extra></extra>"
+        fig.update_traces(
+            hovertemplate="<b>%{y}</b><br>Unemployment Rate: %{x:.1%}<extra></extra>"
         )
 
-         fig.update_layout(
-             title_font_size=22,
-             xaxis_title="Unemployment Rate",
-             yaxis_title="Major"
+        fig.update_layout(
+            title_font_size=22,
+            xaxis_title="Unemployment Rate",
+            yaxis_title="Major"
         )
 
         st.plotly_chart(fig, use_container_width=True)
