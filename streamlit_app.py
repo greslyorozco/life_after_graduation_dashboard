@@ -179,13 +179,13 @@ with tab1:
 
     with st.expander("Click to see our project questions"):
         st.write("""
-        1. Is student debt rising over time?  
-        2. How does debt vary by state?  
-        3. What is the link between debt and income?  
-        4. Does more debt lead to more pay?  
-        5. How does debt connect to job outcomes?  
-        6. How does cost of living change the story?  
-        7. Which school type seems to pay off better?  
+        1. How does major choice influence salary and unemployment outcomes after graduation?  
+        2. How does debt vary across states?  
+        3. What is the relationship between student debt and post-graduation earnings?  
+        4. Does higher student debt lead to higher salaries?  
+        5. How does student debt relate to employment outcomes?  
+        6. How might geographic location and cost of living affect debt and earnings?  
+        7. Which school type appears to provide the strongest financial outcomes?  
         """)
 
 with tab2:
