@@ -230,7 +230,7 @@ with tab2:
             top_10,
             x="Unemployment_rate",
             y="Major",
-            color="Unemployment Rate",
+            color="Unemployment_rate",
             orientation="h",
             title="Unemployment Rate",
             labels={"Unemployment_rate":"Unemployment Rate", "Major":"Major"},
