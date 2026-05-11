@@ -476,8 +476,12 @@ with tab5:
     st.subheader("Major Outcomes Dataset Preview")
     st.dataframe(majors_df.head(), width=1200, height=300)
 
-    st.subheader("Student Loan by State Dataset Preview")
+  st.subheader("Student Loan by State Dataset Preview")
+
+if loan_state_df is not None:
     st.dataframe(loan_state_df.head(), width=1000, height=300)
+else:
+    st.write("Student loan dataset not available.")
 
     col1, col2, col3 = st.columns(3)
 
