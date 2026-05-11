@@ -3,7 +3,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
-import plotly.express as pxe
+import plotly.express as px
 import os
 import zipfile
 
@@ -208,7 +208,6 @@ with tab2:
             template="plotly_white",
             color_continuous_scale=["lightpink", "orange", "gold"]
         )
-
         fig.update_layout(
             title_font_size=22,
             xaxis_title="Median Salary",
