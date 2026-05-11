@@ -216,7 +216,7 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
-        )
+    
         fig.update_layout(
             title_font_size=22,
             xaxis_title="Median Salary",
