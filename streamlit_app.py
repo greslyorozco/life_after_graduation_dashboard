@@ -399,15 +399,15 @@ with tab6:
 
     st.success('''
     - Public schools generally showed lower median debt compared to some private institutions.
-    - Salary and employment outcomes should both be considered when evaluating college value.
+    - Looking at debt alone does ot provide the full picture of college value.
     ''')
     st.info('''
     - Engineering and health majors tend to have higher major salaries but also involve higher debt.
-    - Major choice strongly impacts earnings after graduation.
+    - Major choice appears to have a strong impact on salary and unemployment outcomes.
     ''')
     st.warning('''
-    - Higher student debt does not always lead to higher salaries.
-    - Geographic location may influence debt levels and career outcomes.
+    - Higher student debt does not always lead to higher earnings after graduation.
+    - Debt and career outcomes can vary significantly depending on location, school type, and field of study.
     ''')
 
 with tab7:
