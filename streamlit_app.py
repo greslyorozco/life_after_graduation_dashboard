@@ -252,6 +252,7 @@ with col_right:
         """)
 
 st.caption("Use the major category filter in the sidebar to change the major outcomes.")
+
 with tab3:
     st.header("Student Debt")
 
