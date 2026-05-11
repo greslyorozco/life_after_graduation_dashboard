@@ -1,47 +1,13 @@
 import streamlit as st
 import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plte
 import numpy as np
 import plotly.express as px
 import os
 import zipfile
 
-df = pd.read_csv("Master_Analytical_File_No_Empty_Data.csv")
 
-# Filter for your states
-states = ['CT', 'GA', 'FL']
-df_states = df[df['State'].isin(states)].copy()
-
-# Drop missing values
-df_states = df_states.dropna(subset=['Earnings (10 Years Out)', 'Median Debt'])
-
-# ---- COST OF LIVING INDEX (approx) ----
-cost_index = {
-    'CT': 1.20,   # expensive
-    'FL': 1.05,   # moderate
-    'GA': 0.90    # cheaper
-}
-
-# Adjust earnings
-df_states['Adjusted Earnings'] = df_states.apply(
-    lambda row: row['Earnings (10 Years Out)'] / cost_index.get(row['State'], 1),
-    axis=1
-)
-
-# Group averages
-grouped = df_states.groupby('State')[['Earnings (10 Years Out)', 'Adjusted Earnings', 'Median Debt']].mean()
-
-# ---- PLOT ----
-fig, ax = plt.subplots()
-
-grouped[['Earnings (10 Years Out)', 'Adjusted Earnings']].plot(kind='bar', ax=ax)
-
-ax.set_title('Raw vs Cost-of-Living Adjusted Earnings (CT vs GA vs FL)')
-ax.set_ylabel('Earnings')
-ax.legend(['Raw Earnings', 'Adjusted Earnings'])
-
-st.pyplot(fig)
 
 
 st.set_page_config(page_title="Life After Graduation", layout="wide")
