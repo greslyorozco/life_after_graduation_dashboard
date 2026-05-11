@@ -342,44 +342,42 @@ with tab3:
 with tab4:
     st.header("Debt and Earnings")
 
+    st.write("""
+    This section compares what students may owe with what graduates may earn.
+    It also shows how location can change the meaning of earnings.
+    """)
+
     st.markdown("---")
-    st.subheader("Geographic Impact: Cost of Living Adjustment (CT vs GA vs FL)")
+    st.subheader("Cost of Living Example: CT vs GA vs FL")
 
     st.write("""
     This chart compares raw earnings and adjusted earnings across Connecticut, Georgia, and Florida.
-    The adjustment accounts for differences in cost of living, which can affect how far a salary actually goes.
+    The adjustment shows that the same salary can feel different depending on where someone lives.
     """)
 
-    # Filter for selected states
     states_of_interest = ["CT", "GA", "FL"]
     geo_df = scorecard_filtered[scorecard_filtered["STABBR"].isin(states_of_interest)].copy()
-
-    # Make sure earnings exist
     geo_df = geo_df.dropna(subset=["MD_EARN_WNE_P10", "DEBT_MDN"])
 
-    # ---- COST OF LIVING INDEX ----
     cost_index = {
-        "CT": 1.20,  # high cost
-        "FL": 1.05,  # medium
-        "GA": 0.90   # lower cost
+        "CT": 1.20,
+        "FL": 1.05,
+        "GA": 0.90
     }
 
-    # Adjust earnings
     geo_df["Adjusted Earnings"] = geo_df.apply(
         lambda row: row["MD_EARN_WNE_P10"] / cost_index.get(row["STABBR"], 1),
         axis=1
     )
 
-    # Group by state
     geo_grouped = geo_df.groupby("STABBR")[["MD_EARN_WNE_P10", "Adjusted Earnings", "DEBT_MDN"]].mean().reset_index()
 
-    # ---- BAR CHART ----
     fig = px.bar(
         geo_grouped,
         x="STABBR",
         y=["MD_EARN_WNE_P10", "Adjusted Earnings"],
         barmode="group",
-        title="Raw vs Cost-of-Living Adjusted Earnings by State",
+        title="Raw vs Adjusted Earnings by State",
         template="plotly_white",
         color_discrete_sequence=["steelblue", "gold"]
     )
@@ -388,18 +386,17 @@ with tab4:
         title_font_size=20,
         xaxis_title="State",
         yaxis_title="Earnings",
-        legend_title="Metrics"
+        legend_title="Measure"
     )
 
     st.plotly_chart(fig, use_container_width=True)
 
-    # ---- OPTIONAL: Debt comparison ----
     fig2 = px.bar(
         geo_grouped,
         x="STABBR",
         y="DEBT_MDN",
         color="STABBR",
-        title="Average Student Debt by State (CT, GA, FL)",
+        title="Average Student Debt by State",
         template="plotly_white",
         color_discrete_sequence=school_colors
     )
@@ -407,121 +404,44 @@ with tab4:
     fig2.update_layout(
         title_font_size=20,
         xaxis_title="State",
-        yaxis_title="Median Debt"
+        yaxis_title="Student Debt"
     )
 
     st.plotly_chart(fig2, use_container_width=True)
 
-    with st.expander("Click to interpret this analysis"):
+    with st.expander("Click to interpret the cost of living section"):
         st.write("""
-        This analysis shows that higher salaries in states like Connecticut do not always mean better financial outcomes.
-        After adjusting for cost of living, the advantage of those higher salaries becomes smaller.
-
-        Georgia has lower raw earnings, but because living costs are lower, the adjusted earnings appear stronger.
-        Florida falls between the two and represents a middle-ground case.
-
-        This demonstrates that geographic location affects both how much students earn and how much that income is worth in real terms.
-        It also suggests that students in high-cost areas may face higher financial pressure due to both higher debt and higher living expenses.
+        This section shows that earnings do not mean the same thing in every state.
+        A higher salary may not go as far in a more expensive state.
+        This is why location matters when thinking about debt and earnings after graduation.
         """)
 
-
-    
     st.markdown("---")
-    st.subheader("Geographic Impact: Cost of Living Adjustment (CT vs GA vs FL)")
+    st.subheader("Debt Compared With Earnings")
 
-    st.write("""
-    This chart compares raw earnings and adjusted earnings across Connecticut, Georgia, and Florida.
-    The adjustment accounts for differences in cost of living, which can affect how far a salary actually goes.
-    """)
-
-    # Filter for selected states
-    states_of_interest = ["CT", "GA", "FL"]
-    geo_df = scorecard_filtered[scorecard_filtered["STABBR"].isin(states_of_interest)].copy()
-
-    # Make sure earnings exist
-    geo_df = geo_df.dropna(subset=["MD_EARN_WNE_P10", "DEBT_MDN"])
-
-    # ---- COST OF LIVING INDEX ----
-    cost_index = {
-        "CT": 1.20,  # high cost
-        "FL": 1.05,  # medium
-        "GA": 0.90   # lower cost
-    }
-
-    # Adjust earnings
-    geo_df["Adjusted Earnings"] = geo_df.apply(
-        lambda row: row["MD_EARN_WNE_P10"] / cost_index.get(row["STABBR"], 1),
-        axis=1
-    )
-
-    # Group by state
-    geo_grouped = geo_df.groupby("STABBR")[["MD_EARN_WNE_P10", "Adjusted Earnings", "DEBT_MDN"]].mean().reset_index()
-
-    # ---- BAR CHART ----
-    fig = px.bar(
-        geo_grouped,
-        x="STABBR",
-        y=["MD_EARN_WNE_P10", "Adjusted Earnings"],
-        barmode="group",
-        title="Raw vs Cost-of-Living Adjusted Earnings by State",
-        template="plotly_white",
-        color_discrete_sequence=["steelblue", "gold"]
-    )
-
-    fig.update_layout(
-        title_font_size=20,
-        xaxis_title="State",
-        yaxis_title="Earnings",
-        legend_title="Metrics"
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
-
-    # ---- OPTIONAL: Debt comparison ----
-    fig2 = px.bar(
-        geo_grouped,
-        x="STABBR",
-        y="DEBT_MDN",
-        color="STABBR",
-        title="Average Student Debt by State (CT, GA, FL)",
-        template="plotly_white",
-        color_discrete_sequence=school_colors
-    )
-
-    fig2.update_layout(
-        title_font_size=20,
-        xaxis_title="State",
-        yaxis_title="Median Debt"
-    )
-
-    st.plotly_chart(fig2, use_container_width=True)
-
-    with st.expander("Click to interpret this analysis"):
-        st.write("""
-        This analysis shows that higher salaries in states like Connecticut do not always mean better financial outcomes.
-        After adjusting for cost of living, the advantage of those higher salaries becomes smaller.
-
-        Georgia has lower raw earnings, but because living costs are lower, the adjusted earnings appear stronger.
-        Florida falls between the two and represents a middle-ground case.
-
-        This demonstrates that geographic location affects both how much students earn and how much that income is worth in real terms.
-        It also suggests that students in high-cost areas may face higher financial pressure due to both higher debt and higher living expenses.
-        """)
-
-
-
-
-    
     if "MD_EARN_WNE_P10" in scorecard_filtered.columns:
-        earnings_df = scorecard_filtered.dropna(subset=["MD_EARN_WNE_P10"])
+        earnings_df = scorecard_filtered.dropna(subset=["MD_EARN_WNE_P10", "DEBT_MDN"])
+
+        earnings_summary = earnings_df.groupby(
+            ["STABBR", "School Type"],
+            as_index=False
+        ).agg({
+            "DEBT_MDN": "median",
+            "MD_EARN_WNE_P10": "median",
+            "INSTNM": "count"
+        })
+
+        earnings_summary = earnings_summary.rename(columns={"INSTNM": "School Count"})
 
         fig = px.scatter(
-            earnings_df,
+            earnings_summary,
             x="DEBT_MDN",
             y="MD_EARN_WNE_P10",
             color="School Type",
-            hover_name="INSTNM",
-            title="Median Student Debt Compared With Median Earnings",
+            size="School Count",
+            hover_name="STABBR",
+            hover_data=["School Count"],
+            title="Median Debt Compared With Median Earnings",
             template="plotly_white",
             color_discrete_sequence=school_colors
         )
@@ -532,19 +452,20 @@ with tab4:
             yaxis_title="Median Earnings"
         )
 
+        fig.update_traces(marker=dict(opacity=0.65))
+
         st.plotly_chart(fig, use_container_width=True)
 
         with st.expander("Click to interpret this scatter plot"):
             st.write("""
-            Each dot is a college. Dots farther right have higher student debt.
-            Dots higher up have higher earnings. If debt and earnings rise together,
-            the dots should move upward as they move right. This chart helps us check if that pattern is clear.
+            Each dot is a group of schools in one state and one school type.
+            Dots on the right have higher student debt.
+            Dots near the top have higher earnings.
+            If the dots are spread out, then debt alone does not explain earnings.
             """)
     else:
         st.write("The earnings column was not found in the dataset.")
 
-    if loan_state_df is not None:
-        st.markdown("---")
 
 with tab5:
     st.header("Data Cleaning and Preprocessing")
