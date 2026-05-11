@@ -195,63 +195,63 @@ with tab2:
 
     top_10 = majors_filtered.sort_values("Median", ascending=False).head(10)
 
-col_left, col_right = st.columns(2)
+    col_left, col_right = st.columns(2)
 
-with col_left:
-    fig = px.bar(
-        top_10,
-        x="Median",
-        y="Major",
-        color="Major",
-        orientation="h",
-        title="Top Majors by Median Salary",
-        template="plotly_white",
-        color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
-    )
+    with col_left:
+        fig = px.bar(
+            top_10,
+            x="Median",
+            y="Major",
+            color="Major",
+            orientation="h",
+            title="Top Majors by Median Salary",
+            template="plotly_white",
+            color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
+        )
 
-    fig.update_layout(
-        title_font_size=22,
-        xaxis_title="Median Salary",
-        yaxis_title="Major",
-        showlegend=False
-    )
+        fig.update_layout(
+            title_font_size=22,
+            xaxis_title="Median Salary",
+            yaxis_title="Major",
+            showlegend=False
+        )
 
-    st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
 
-    with st.expander("Click to interpret the salary chart"):
-        st.write("""
-        This chart shows which majors in the selected group have the highest typical salary.
-        It helps us see which fields may lead to stronger earnings after graduation.
-        """)
+        with st.expander("Click to interpret the salary chart"):
+            st.write("""
+            This chart shows which majors in the selected group have the highest typical salary.
+            It helps us see which fields may lead to stronger earnings after graduation.
+            """)
 
-with col_right:
-    fig = px.bar(
-        top_10,
-        x="Unemployment_rate",
-        y="Major",
-        color="Major",
-        orientation="h",
-        title="Unemployment Rate",
-        template="plotly_white",
-        color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
-    )
+    with col_right:
+        fig = px.bar(
+            top_10,
+            x="Unemployment_rate",
+            y="Major",
+            color="Major",
+            orientation="h",
+            title="Unemployment Rate",
+            template="plotly_white",
+            color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
+        )
 
-    fig.update_layout(
-        title_font_size=22,
-        xaxis_title="Unemployment Rate",
-        yaxis_title="Major",
-        showlegend=False
-    )
+        fig.update_layout(
+            title_font_size=22,
+            xaxis_title="Unemployment Rate",
+            yaxis_title="Major",
+            showlegend=False
+        )
 
-    st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
 
-    with st.expander("Click to interpret the unemployment chart"):
-        st.write("""
-        This chart looks at job risk. A major can have a strong salary, but if unemployment is higher,
-        students may still face uncertainty after graduation.
-        """)
+        with st.expander("Click to interpret the unemployment chart"):
+            st.write("""
+            This chart looks at job risk. A major can have a strong salary, but if unemployment is higher,
+            students may still face uncertainty after graduation.
+            """)
 
-st.caption("Use the major category filter in the sidebar to change the major outcomes.")
+    st.caption("Use the major category filter in the sidebar to change the major outcomes.")
 
 with tab3:
     st.header("Student Debt")
