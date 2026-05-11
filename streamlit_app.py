@@ -479,9 +479,6 @@ with tab5:
     st.subheader("Student Loan by State Dataset Preview")
     st.dataframe(loan_state_df.head(), width=1000, height=300)
 
-    st.subheader("Student Loan by State Dataset Preview")
-    st.dataframe(loan_state_df.head(), width=1000, height=300)
-
     col1, col2, col3 = st.columns(3)
 
     with col1:
