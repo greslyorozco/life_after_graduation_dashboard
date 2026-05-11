@@ -508,7 +508,7 @@ with tab5:
     with st.expander("Click to see missing values"):
         st.write(majors_df.isna().sum())
 
-        st.subheader("Cleaning Steps")
+    st.subheader("Cleaning Steps")
 
     st.write("""
     1. Loaded the College Scorecard dataset.  
@@ -519,6 +519,7 @@ with tab5:
     6. Created a School Type column from the CONTROL column.  
     7. Used groupby to summarize debt by school type and state.  
     """)
+    
 with tab6:
     st.header("Key Findings")
 
