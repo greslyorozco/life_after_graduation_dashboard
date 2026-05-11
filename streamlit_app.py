@@ -103,7 +103,7 @@ with col_title:
     """)
 
     st.write("""
-    We compare student debt with salary, unemployment, school type, major choice, and location.
+    We compare how student debt connects to salary, unemployment, school type, major choice, and location.
     """)
 
 with col_image:
