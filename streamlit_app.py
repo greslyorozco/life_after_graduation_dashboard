@@ -197,25 +197,27 @@ with tab2:
 
     col_left, col_right = st.columns(2)
 
+  with col_left:
     fig = px.bar(
-    top_10,
-    x="Median",
-    y="Major",
-    color="Major",
-    orientation="h",
-    title="Top Majors by Median Salary",
-    template="plotly_white",
-    color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
-)
+        top_10,
+        x="Median",
+        y="Major",
+        color="Major",
+        orientation="h",
+        title="Top Majors by Median Salary",
+        template="plotly_white",
+        color_discrete_sequence=["steelblue", "gold", "lightpink", "seagreen", "orange"]
+    )
 
-fig.update_layout(
-    title_font_size=22,
-    xaxis_title="Median Salary",
-    yaxis_title="Major",
-    showlegend=False
-)
+    fig.update_layout(
+        title_font_size=22,
+        xaxis_title="Median Salary",
+        yaxis_title="Major",
+        showlegend=False
+    )
 
-st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
+
     with st.expander("Click to interpret the salary chart"):
         st.write("""
         This chart shows which majors in the selected group have the highest typical salary.
