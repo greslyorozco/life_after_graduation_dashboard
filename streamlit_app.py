@@ -207,7 +207,7 @@ with tab2:
             title="Top Majors by Median Salary",
             labels={"Median": "Median Salary", "Major":"Major"},
             template="plotly_white",
-            color_continuous_scale=["lightpink", "lightgreen", "gold", "lightblue"]
+            color_continuous_scale=["lightpink", "gold", "lightgreen","lightblue"]
         )
 
         fig.update_layout(
