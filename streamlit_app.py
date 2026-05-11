@@ -250,13 +250,13 @@ with tab2:
         showlegend=False
     )
 
-        st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
-        with st.expander("Click to interpret the unemployment chart"):
-            st.write("""
-            This chart looks at job risk. A major can have a strong salary, but if unemployment is higher,
-            students may still face uncertainty after graduation.
-            """)
+    with st.expander("Click to interpret the unemployment chart"):
+        st.write("""
+        This chart looks at job risk. A major can have a strong salary, but if unemployment is higher,
+        students may still face uncertainty after graduation.
+        """)
 
     st.caption("Use the major category filter in the sidebar to change the major outcomes.")
 
