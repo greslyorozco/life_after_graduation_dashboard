@@ -216,7 +216,7 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
-        with st.expander("Click to interpret the salary chart"):
+    with st.expander("Click to interpret the salary chart"):
             st.write("""
             This chart shows which majors in the selected group have the highest typical salary.
             It helps us see which fields may lead to stronger earnings after graduation.
