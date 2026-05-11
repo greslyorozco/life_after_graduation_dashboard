@@ -247,7 +247,7 @@ with tab2:
             This chart looks at job risk. A major can have a strong salary, but if unemployment is higher,
             students may still face uncertainty after graduation.
             """)
-    st.caption("Use the major category filter in the sidebar to change the major outcomes.")
+    
 with tab3:
     st.header("Student Debt")
 
