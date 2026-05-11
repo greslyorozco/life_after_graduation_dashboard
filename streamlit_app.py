@@ -253,19 +253,18 @@ with tab2:
             """)
     st.caption("Use the salary range slider in the sidebar to interactively filter major outcomes.")
 with tab3:
-    st.header("Student Debt by School Type")
+    st.header("Student Debt")
 
-    debt_summary = scorecard_filtered.groupby("School Type")["DEBT_MDN"].median()
+    debt_summary = scorecard_filtered.groupby("School Type", as_index=False)["DEBT_MDN"].median()
 
     st.subheader("Median Debt by School Type")
-    st.write(debt_summary)
 
-    fig = px.box(
-        scorecard_filtered,
+    fig = px.bar(
+        debt_summary,
         x="School Type",
         y="DEBT_MDN",
         color="School Type",
-        title="Distribution of Median Student Debt by School Type",
+        title="Median Student Debt by School Type",
         template="plotly_white",
         color_discrete_sequence=school_colors
     )
@@ -278,10 +277,36 @@ with tab3:
 
     st.plotly_chart(fig, use_container_width=True)
 
-    with st.expander("Click to interpret this box plot"):
+    with st.expander("Click to interpret this bar chart"):
         st.write("""
-        This chart compares student debt across public, private nonprofit, and private for profit schools.
-        The line inside each box shows the middle debt value. The dots show schools with much higher or lower debt.
+        This chart compares the middle student debt amount for each school type.
+        A taller bar means students from that school type usually owe more.
+        We used a bar chart here because it is clean and easy to compare.
+        """)
+
+    with st.expander("Click to see the spread of student debt"):
+        fig = px.box(
+            scorecard_filtered,
+            x="School Type",
+            y="DEBT_MDN",
+            color="School Type",
+            points=False,
+            title="Student Debt Spread by School Type",
+            template="plotly_white",
+            color_discrete_sequence=school_colors
+        )
+
+        fig.update_layout(
+            title_font_size=22,
+            xaxis_title="School Type",
+            yaxis_title="Median Student Debt"
+        )
+
+        st.plotly_chart(fig, use_container_width=True)
+
+        st.write("""
+        This extra chart shows how spread out student debt is within each school type.
+        We placed it inside a click section so the main dashboard stays clean.
         """)
 
     st.markdown("---")
