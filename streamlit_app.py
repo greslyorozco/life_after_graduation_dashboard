@@ -475,6 +475,18 @@ with tab5:
 
     st.subheader("College Scorecard Dataset Preview")
     st.dataframe(scorecard_df.head(), width=1200, height=300)
+    
+    with col1:
+        st.metric("Scorecard Rows", scorecard_df.shape[0])
+
+    with col2:
+        st.metric("Scorecard Columns", scorecard_df.shape[1])
+
+    with st.expander("Click to see Scorecard columns"):
+        st.write(scorecard_df.columns.tolist())
+
+    with st.expander("Click to see missing values"):
+        st.write(scorecard_df.isna().sum())
 
     st.subheader("Major Outcomes Dataset Preview")
     st.dataframe(majors_df.head(), width=1200, height=300)
@@ -482,19 +494,17 @@ with tab5:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.metric("Scorecard Rows", scorecard_df.shape[0])
+        st.metric("Majors Rows", majors_df.shape[0])
 
     with col2:
-        st.metric("Scorecard Columns", scorecard_df.shape[1])
+        st.metric("Majors Columns", majors_df.shape[1])
 
-    with col3:
-        st.metric("Major Rows", majors_df.shape[0])
 
-    with st.expander("Click to see Scorecard columns"):
-        st.write(scorecard_df.columns.tolist())
+    with st.expander("Click to see Majors columns"):
+        st.write(majors_df.columns.tolist())
 
     with st.expander("Click to see missing values"):
-        st.write(scorecard_df.isna().sum())
+        st.write(majors_df.isna().sum())
 
     st.subheader("Cleaning Steps")
 
